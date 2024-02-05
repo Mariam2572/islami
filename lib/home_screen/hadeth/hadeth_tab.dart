@@ -43,7 +43,10 @@ class _HadethTabState extends State<HadethTab> {
             color: MyTheme.primaryLightMode,
           )
           :
-          Expanded(child: ListView.separated(itemBuilder: (context, index) {
+          Expanded(
+            child:
+             ListView.separated(
+              itemBuilder: (context, index) {
             return ItemHadethName(hadeth:ahadethList[index]);
           } ,
              separatorBuilder: (context, index) => Divider(

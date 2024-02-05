@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/home_screen/quran/item_sura%20_details.dart';
 import 'package:islami/them.dart';
-// عرض كل السور
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = ' Sura Details Screen';

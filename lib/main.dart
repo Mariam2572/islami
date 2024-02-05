@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         SuraDetailsScreen.routeName :(context) => SuraDetailsScreen(),
-       HadethDetailsScreen.routeName:(context) => HadethDetailsScreen()
+       HadethDetailsScreen.routeName :(context) => HadethDetailsScreen()
       },
        theme: MyTheme.lightMode,
     );

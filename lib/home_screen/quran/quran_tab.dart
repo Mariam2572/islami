@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami/home_screen/quran/item_sura.dart';
 import 'package:islami/home_screen/quran/sura_details_screen.dart';
-// تفاصيل فهرس السور
 class QuranTab extends StatelessWidget {
   List<String> suraName = [
     "الفاتحه",
