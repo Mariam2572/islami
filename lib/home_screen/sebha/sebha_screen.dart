@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami/them.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SebhaTab extends StatefulWidget {
   @override
@@ -14,11 +15,16 @@ class _SebhaTabState extends State<SebhaTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Column(
+            child: Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.topCenter,
               children: [
-                Image.asset('assets/images/head_sebha_logo.png'),
+                Positioned(
+                    bottom: 200,
+                    child: Image.asset('assets/images/head_sebha_logo.png')),
                 AnimatedRotation(
                   duration: Duration(seconds: 1),
                   turns: turns,
@@ -46,7 +52,7 @@ class _SebhaTabState extends State<SebhaTab> {
             ),
           ),
           Text(
-            'عدد التسبيحات',
+            AppLocalizations.of(context)!.num_of_tasbihs,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           Container(
@@ -72,19 +78,17 @@ class _SebhaTabState extends State<SebhaTab> {
             ),
           ),
           ElevatedButton(
-            style: ButtonStyle(
-             
-              backgroundColor: MaterialStatePropertyAll(MyTheme.colorWhite)
-            ),
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll(MyTheme.colorWhite)),
               onPressed: () {
                 counter = 0;
                 text = 'سبحان الله';
                 setState(() {});
               },
-              child: Text('إعادة',
-              style: TextStyle(color: MyTheme.primaryLightMode,
-              fontSize: 25
-              ),
+              child: Text(
+                AppLocalizations.of(context)!.restart,
+                style: TextStyle(color: MyTheme.primaryLightMode, fontSize: 25),
               ))
         ],
       ),
