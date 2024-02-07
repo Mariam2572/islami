@@ -1,0 +1,13 @@
+{ 
+
+"app_title" : "Islami ",
+"sura_name" : " Sura Name",
+"hadeth_name" : " Hadeth Name",
+"quran" : " Quran",
+"hadeth" : " Hadeth",
+"sebha" : " Sebha",
+"radio" : " Radio",
+"num_of_tasbihs" : "Number of praises ",
+"restart" : "Restart ",
+"settings" :"Settings"
+}

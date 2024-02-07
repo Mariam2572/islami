@@ -1,0 +1,13 @@
+{
+"app_title" : "إسلامي ",
+"sura_name" : " اسم السروة ",
+"hadeth_name" : " اسم الحديث",
+"quran" : " قرآن",
+"hadeth" : " حديث",
+"sebha" : " سبحة",
+"radio" : " الإذاعة",
+"num_of_tasbihs" : "عدد التسبحات ",
+"restart" : "إعادة",
+"settings" :"الإعدادات"
+
+}
