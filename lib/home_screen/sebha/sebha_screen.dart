@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:islami/them.dart';
+import 'package:islami/providers/app_config_provider.dart';
+import 'package:islami/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class SebhaTab extends StatefulWidget {
   @override
@@ -13,6 +15,8 @@ class _SebhaTabState extends State<SebhaTab> {
   double turns = 0.0;
   @override
   Widget build(BuildContext context) {
+        var provider = Provider.of<AppConfigProvider>(context);
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,18 +28,17 @@ class _SebhaTabState extends State<SebhaTab> {
               children: [
                 Positioned(
                     bottom: 200,
-                    child: Image.asset('assets/images/head_sebha_logo.png')),
-                AnimatedRotation(
-                  duration: Duration(seconds: 1),
-                  turns: turns,
-                  child: InkWell(
-                      onTap: () {
+                    child:provider.isDark()?
+                    Image.asset('assets/images/head_sebha_dark.png')
+                    : Image.asset('assets/images/head_sebha_logo.png')),
+                InkWell(
+                    onTap: () {
                         turns += 1 / 45;
                         setState(() {
                           counter++;
                           if (counter == 33) {
                             text = 'الحمد لله';
-                            //counter=0;
+                           
                           }
                           if (counter == 66) {
                             text = 'الله أكبر';
@@ -46,8 +49,15 @@ class _SebhaTabState extends State<SebhaTab> {
                           }
                         });
                       },
-                      child: Image.asset('assets/images/body_sebha_logo.png')),
+                  child: AnimatedRotation(
+                    duration: Duration(seconds: 1),
+                    turns: turns,
+                    child: 
+                        provider.isDark()?
+                        Image.asset('assets/images/body_sebha_dark.png')
+                        : Image.asset('assets/images/body_sebha_logo.png')),
                 ),
+                
               ],
             ),
           ),
@@ -59,7 +69,10 @@ class _SebhaTabState extends State<SebhaTab> {
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 223, 195, 154),
+                color: provider.isDark()?
+                MyTheme.colorYellow
+                :
+                 Color.fromARGB(255, 223, 195, 154),
                 borderRadius: BorderRadius.circular(15)),
             child: Text(
               '$counter',
@@ -70,11 +83,15 @@ class _SebhaTabState extends State<SebhaTab> {
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: MyTheme.primaryLightMode,
+                color:provider.isDark()?MyTheme.colorYellow
+                :
+                 MyTheme.primaryLightMode,
                 borderRadius: BorderRadius.circular(20)),
             child: Text(
               text,
-              style: TextStyle(fontSize: 25, color: MyTheme.colorWhite),
+              style: TextStyle(fontSize: 25, color:
+              provider.isDark()?MyTheme.blackColor
+              : MyTheme.colorWhite),
             ),
           ),
           ElevatedButton(
@@ -88,7 +105,9 @@ class _SebhaTabState extends State<SebhaTab> {
               },
               child: Text(
                 AppLocalizations.of(context)!.restart,
-                style: TextStyle(color: MyTheme.primaryLightMode, fontSize: 25),
+                style: TextStyle(color:
+                provider.isDark()?MyTheme.primaryDarkMode
+                : MyTheme.primaryLightMode, fontSize: 25),
               ))
         ],
       ),

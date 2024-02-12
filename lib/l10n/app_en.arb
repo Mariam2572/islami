@@ -9,5 +9,12 @@
 "radio" : " Radio",
 "num_of_tasbihs" : "Number of praises ",
 "restart" : "Restart ",
-"settings" :"Settings"
+"settings" :"Settings",
+"language" : "Language",
+"english" : "English",
+"arabic" : "Arabic",
+"theme" : "Theme",
+"light" : "Light",
+"dark" : "Dark"
+
 }

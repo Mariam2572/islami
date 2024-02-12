@@ -8,6 +8,12 @@
 "radio" : " الإذاعة",
 "num_of_tasbihs" : "عدد التسبحات ",
 "restart" : "إعادة",
-"settings" :"الإعدادات"
+"settings" :"الإعدادات",
+"language" : "اللغة",
+"english" : "الإنجليزية",
+"arabic" : "العربية",
+"theme" : "النمط",
+"light" : "نهاري",
+"dark" : "ليلي"
 
 }

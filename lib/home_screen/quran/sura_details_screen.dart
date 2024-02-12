@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/home_screen/quran/item_sura%20_details.dart';
-import 'package:islami/them.dart';
+import 'package:islami/providers/app_config_provider.dart';
+import 'package:islami/theme.dart';
+import 'package:provider/provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = ' Sura Details Screen';
@@ -15,6 +17,8 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+        var provider =Provider.of<AppConfigProvider>(context);
+
     var args = ModalRoute.of(context)?.settings.arguments as SuraDetailsArgs;
     if (verses.isEmpty) {
       loadFile(args.fileIndex);
@@ -22,11 +26,18 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
 
     return Stack(
       children: [
+         provider.isDark()?
         Image.asset(
+          'assets/images/background_dark.png',
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.fill,  
+        ):
+         Image.asset(
           'assets/images/background.png',
           width: double.infinity,
           height: double.infinity,
-          fit: BoxFit.fill,
+          fit: BoxFit.fill,  
         ),
         Scaffold(
           appBar: AppBar(
@@ -45,7 +56,10 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                       vertical: MediaQuery.of(context).size.height * 0.06,
                       horizontal: MediaQuery.of(context).size.width * 0.05),
                   decoration: BoxDecoration(
-                    color: MyTheme.colorWhite,
+                     color: provider.isDark()?MyTheme.primaryDarkMode
+              : 
+              MyTheme.colorWhite
+              ,
                     borderRadius: BorderRadius.circular(25),
                     boxShadow: [
                       BoxShadow(
@@ -56,12 +70,8 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                       ),
                     ],
                   ),
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) => Divider(
-              thickness: 2,
-              color: Theme.of(context).primaryColor,
-            ),
-                    itemCount: verses.length,
+                  child: ListView.builder(
+                 itemCount: verses.length,
                     itemBuilder: (context, index) {
                       return ItemSuraDetails(name: verses[index], index: index,);
                     },

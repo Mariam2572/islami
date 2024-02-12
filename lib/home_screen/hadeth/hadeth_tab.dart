@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/home_screen/hadeth/item_hadeth_name.dart';
-import 'package:islami/them.dart';
+import 'package:islami/providers/app_config_provider.dart';
+import 'package:islami/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class Hadeth {
   String title;
@@ -20,6 +22,8 @@ class _HadethTabState extends State<HadethTab> {
 
   @override
   Widget build(BuildContext context) {
+        var provider =Provider.of<AppConfigProvider>(context);
+
     if (ahadethList.isEmpty) {
       loadingHadeth();
     }
@@ -31,14 +35,20 @@ class _HadethTabState extends State<HadethTab> {
           ),
            Divider(
             thickness: 3,
-            color: Theme.of(context).primaryColor,
+          color: provider.isDark()?
+            MyTheme.colorYellow
+            :
+            MyTheme.primaryLightMode,
           ),
          Text(AppLocalizations.of(context)!.hadeth_name,
          style: Theme.of(context).textTheme.titleLarge,
          ),
          Divider(
             thickness: 3,
-            color: Theme.of(context).primaryColor,
+            color: provider.isDark()?
+            MyTheme.colorYellow
+            :
+            MyTheme.primaryLightMode,
           ),
           ahadethList.isEmpty ?
           CircularProgressIndicator(
@@ -53,7 +63,10 @@ class _HadethTabState extends State<HadethTab> {
           } ,
              separatorBuilder: (context, index) => Divider(
               thickness: 2,
-              color: Theme.of(context).primaryColor,
+              color: provider.isDark()?
+            MyTheme.colorYellow
+            :
+            MyTheme.primaryLightMode,
             ),
             itemCount: ahadethList.length))
         ],
