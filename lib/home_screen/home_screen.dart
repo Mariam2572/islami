@@ -4,7 +4,7 @@ import 'package:islami/home_screen/quran/quran_tab.dart';
 import 'package:islami/home_screen/radio/radio.dart';
 import 'package:islami/home_screen/sebha/sebha_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:islami/settings/settings_tab.dart';
+import 'package:islami/home_screen/settings/settings_tab.dart';
 
 
 class HomeScreen extends StatefulWidget {
