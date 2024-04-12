@@ -5,7 +5,7 @@ class MyTheme {
   static Color primaryLightMode = const Color(0xffB7935F);
   static Color primaryDarkMode = const Color(0xff141A2E);
   static Color colorWhite = const Color(0xfffffffff);
-  static Color colorYellow = const Color(0xffFACC1D);
+  static Color yellowColor = const Color(0xffFACC1D);
   static Color lightColor = Color.fromARGB(255, 223, 195, 154);
 
   static ThemeData lightMode = ThemeData(
@@ -54,7 +54,7 @@ class MyTheme {
           titleSmall: TextStyle(fontSize: 20, fontWeight: FontWeight.w400,
           color: colorWhite)),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        selectedItemColor: colorYellow,
+        selectedItemColor: yellowColor,
         showUnselectedLabels: true,
       ));
       

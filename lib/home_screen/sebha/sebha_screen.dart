@@ -70,7 +70,7 @@ class _SebhaTabState extends State<SebhaTab> {
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: provider.isDark()?
-                MyTheme.colorYellow
+                MyTheme.yellowColor
                 :
                  Color.fromARGB(255, 223, 195, 154),
                 borderRadius: BorderRadius.circular(15)),
@@ -83,7 +83,7 @@ class _SebhaTabState extends State<SebhaTab> {
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color:provider.isDark()?MyTheme.colorYellow
+                color:provider.isDark()?MyTheme.yellowColor
                 :
                  MyTheme.primaryLightMode,
                 borderRadius: BorderRadius.circular(20)),

@@ -7,7 +7,9 @@ import 'package:islami/home_screen/radio/cubit/radio_cubit.dart';
 import 'package:islami/home_screen/radio/cubit/states.dart';
 import 'package:islami/home_screen/radio/radio_item.dart';
 import 'package:islami/model/radio_response.dart';
+import 'package:islami/providers/app_config_provider.dart';
 import 'package:islami/theme.dart';
+import 'package:provider/provider.dart';
 
 class RadioTab extends StatefulWidget {
   
@@ -17,47 +19,70 @@ class RadioTab extends StatefulWidget {
 
 class _RadioTabState extends State<RadioTab> {
 @override
+ 
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => RadioCubit()..getRadio(),
-    child: BlocBuilder<RadioCubit,RadioState>(
-     
-      builder: (context, state){
- if (state is RadioLoadingState) {
-    return Center(
-          child: CircularProgressIndicator(
-            color: MyTheme.primaryLightMode,
-          ),
-        );
-          } else if (state is RadioErrorState) {
-            return Center(
-              child: Text(state.errorMessage),
-            );
+        var provider = Provider.of<AppConfigProvider>(context);
+
+       return BlocProvider(
+      create: (context) => RadioCubit(),
+      child: BlocBuilder<RadioCubit, RadioState>(
+        builder: (context, state) {
+          switch (state) {
+            case RadioLoadingState():
+              return Center(
+                  child: CircularProgressIndicator(
+                      color: provider.isDark()
+                          ? MyTheme.yellowColor
+                          : MyTheme.primaryLightMode));
+            case RadioSuccessState():
+            return  RadioItem();
+      
+            case RadioErrorState():
+              return Text(state.errorMessage);
           }
-          else if(state is RadioSuccessState){
-                return  
-       Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Image.asset('assets/images/radio_image.png')),
-          Expanded(
-            flex: 2,
-            child: RadioItem(),
-          ) ,
-          
-       ],
+        },
       ),
     );
+//     return BlocProvider(create: (context) => RadioCubit()..getRadio(),
+//     child: BlocBuilder<RadioCubit,RadioState>(
+     
+//       builder: (context, state){
+//  if (state is RadioLoadingState) {
+//     return Center(
+//           child: CircularProgressIndicator(
+//             color: MyTheme.primaryLightMode,
+//           ),
+//         );
+//           } else if (state is RadioErrorState) {
+//             return Center(
+//               child: Text(state.errorMessage),
+//             );
+//           }
+//           else if(state is RadioSuccessState){
+//                 return  
+//        Scaffold(
+//       body: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           Expanded(
+//             flex: 2,
+//             child: Image.asset('assets/images/radio_image.png')),
+//           Expanded(
+//             flex: 2,
+//             child: RadioItem(),
+//           ) ,
+          
+//        ],
+//       ),
+//     );
        
-          }
-    return Container();  
-    },
-    ),
-    );
+//           }
+//     return Container();  
+//     },
+//     ),
+//     );
     
    
       

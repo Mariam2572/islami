@@ -133,7 +133,7 @@ class QuranTab extends StatelessWidget {
           Divider(
             thickness: 3,
             color: provider.isDark()?
-            MyTheme.colorYellow
+            MyTheme.yellowColor
             :
             MyTheme.primaryLightMode,
           ),
@@ -144,7 +144,7 @@ class QuranTab extends StatelessWidget {
           Divider(
             thickness: 3,
             color: provider.isDark()?
-            MyTheme.colorYellow
+            MyTheme.yellowColor
             :
             MyTheme.primaryLightMode,
           ),
@@ -153,7 +153,7 @@ class QuranTab extends StatelessWidget {
             separatorBuilder: (context, index) => Divider(
               thickness: 2,
               color: provider.isDark()?
-            MyTheme.colorYellow
+            MyTheme.yellowColor
             :
             MyTheme.primaryLightMode,
             ),

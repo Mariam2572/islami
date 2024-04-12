@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:islami/home_screen/radio/cubit/radio_cubit.dart';
 import 'package:islami/model/radio_response.dart';
+import 'package:islami/providers/app_config_provider.dart';
 import 'package:islami/theme.dart';
+import 'package:provider/provider.dart';
 
 class RadioItem extends StatefulWidget {
  
@@ -14,63 +16,69 @@ class RadioItem extends StatefulWidget {
 }
 
 class _RadioItemState extends State<RadioItem> {
- @override
+
  
   @override
   Widget build(BuildContext context) {
-    var cubit = BlocProvider.of<RadioCubit>(context);
+    var provider = Provider.of<AppConfigProvider>(context);
+   var cubit = BlocProvider.of<RadioCubit>(context);
+  // RadioCubit cubit = RadioCubit();
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      child: Column(
-        children: [
-          Text(
-            '${cubit.currentRadio?.name ?? ''}\n',
-            style: Theme.of(context)
-                .textTheme
-                .titleSmall!
-                .copyWith(fontWeight: FontWeight.bold, fontSize: 18),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * .05,
-                horizontal: MediaQuery.of(context).size.height * .05),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                  onTap: () {
-                    cubit.PreviousRadio();
-                    
-               
-                  },
-                  child: ImageIcon(
-                      color: MyTheme.primaryLightMode,
-                      AssetImage('assets/images/Icon metro-next.png')),
-                ),
-                InkWell(
-                  onTap: ()  async {
-
-       await cubit.player.play(UrlSource(cubit.currentRadio?.url??''));
-                  },
-                  child: ImageIcon(
-                    color: MyTheme.primaryLightMode,
-                    AssetImage('assets/images/Icon awesome-play.png'),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    cubit.NextRadio();
-                    
-                  },
-                  child: ImageIcon(
-                      color: MyTheme.primaryLightMode,
-                      AssetImage('assets/images/Icon right-next.png')),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+      child:
+        Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+         Image(image: AssetImage("assets/images/radio_image.png")),
+        SizedBox(
+          height: 60,
+        ),
+        Text(
+          cubit.currentRadio!.name ?? "",
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+                onPressed: () {
+                  cubit.PreviousRadio();
+                },
+                icon: Icon(
+                  Icons.skip_previous_rounded,
+                  size: 40,
+                  color: provider.isDark()
+                      ? MyTheme.yellowColor
+                      : MyTheme.primaryLightMode,
+                )),
+            IconButton(
+                onPressed: () {
+                  cubit.onPlay();
+                },
+                icon: Icon(
+                  cubit.isPlay ? Icons.pause_sharp : Icons.play_arrow_rounded,
+                  size: 40,
+                  color: provider.isDark()
+                      ? MyTheme.yellowColor
+                      : MyTheme.primaryLightMode,
+                )),
+            IconButton(
+                onPressed: () {
+                  cubit.NextRadio();
+                },
+                icon: Icon(
+                  Icons.skip_next_rounded,
+                  size: 40,
+                  color: provider.isDark()
+                      ? MyTheme.yellowColor
+                      : MyTheme.primaryLightMode,
+                )),
+          ],
+        )
+      ],
+        ));
   }
 }
