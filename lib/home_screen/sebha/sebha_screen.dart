@@ -27,29 +27,29 @@ class _SebhaTabState extends State<SebhaTab> {
               alignment: Alignment.topCenter,
               children: [
                 Positioned(
-                    bottom: 200,
-                    child:provider.isDark()?
-                    Image.asset('assets/images/head_sebha_dark.png')
-                    : Image.asset('assets/images/head_sebha_logo.png')),
-                InkWell(
-                    onTap: () {
-                        turns += 1 / 45;
-                        setState(() {
-                          counter++;
-                          if (counter == 33) {
-                            text = 'الحمد لله';
-                           
-                          }
-                          if (counter == 66) {
-                            text = 'الله أكبر';
-                          }
-                          if (counter > 99) {
-                            counter = 0;
-                            text = 'سبحان الله';
-                          }
-                        });
-                      },
-                  child: AnimatedRotation(
+                bottom: 200,
+                child:provider.isDark()?
+                Image.asset('assets/images/head_sebha_dark.png')
+                : Image.asset('assets/images/head_sebha_logo.png')),
+            InkWell(
+                onTap: () {
+                    turns += 1 / 45;
+                    setState(() {
+                      counter++;
+                      if (counter == 33) {
+                        text = 'الحمد لله';
+                        
+                      }
+                      if (counter == 66) {
+                        text = 'الله أكبر';
+                      }
+                      if (counter > 99) {
+                        counter = 0;
+                        text = 'سبحان الله';
+                      }
+                    });
+                  },
+              child: AnimatedRotation(
                     duration: Duration(seconds: 1),
                     turns: turns,
                     child: 
