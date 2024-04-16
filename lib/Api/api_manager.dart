@@ -1,17 +1,24 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-import 'package:islami/model/radio_response.dart';
-class ApiManager{
-  static Future <RadioResponse?> getRadioApi() async {
-  try {
-  var url = Uri.parse('https://mp3quran.net/api/v3/radios');
-  var response = await http.get(url);
-  var json=  jsonDecode(response.body);
-  return RadioResponse.fromJson(json);
-} on Exception catch (e) {
-  print(e.toString());
-  // TODO
-}
-} 
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import '../model/radio_response.dart';
+
+
+  
+class ApiServices{
+  
+  var _dio = Dio(
+    BaseOptions(baseUrl:"https://mp3quran.net/api/v3")
+  );
+  ApiServices(){
+    _dio.interceptors.add(PrettyDioLogger(
+  
+    ));
+  }
+   getRadio() async {
+   var response= await _dio.get("/radios");
+   return response.data;
+  }
 }

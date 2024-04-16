@@ -7,9 +7,12 @@ import 'package:islami/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async{
+    WidgetsFlutterBinding.ensureInitialized();
+var provider = AppConfigProvider();
+ await provider.loadingSettings;
   runApp(ChangeNotifierProvider(
-    create: (context) => AppConfigProvider(),
+    create: (context) => provider,
     child: IslamiApp()));
 }
 

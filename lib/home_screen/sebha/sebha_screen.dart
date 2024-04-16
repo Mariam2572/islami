@@ -32,6 +32,9 @@ class _SebhaTabState extends State<SebhaTab> {
                 Image.asset('assets/images/head_sebha_dark.png')
                 : Image.asset('assets/images/head_sebha_logo.png')),
             InkWell(
+              highlightColor: Colors.transparent,
+              splashColor:Colors.transparent ,
+              focusColor: Colors.transparent,
                 onTap: () {
                     turns += 1 / 45;
                     setState(() {

@@ -3,8 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:islami/Api/api_manager.dart';
 import 'package:islami/home_screen/radio/cubit/states.dart';
 import 'package:islami/model/radio_response.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class RadioCubit extends Cubit<RadioState> {
   List<Radios> radio = [];
@@ -12,15 +10,19 @@ class RadioCubit extends Cubit<RadioState> {
   int _currentIndex = 0;
   AudioPlayer player = AudioPlayer();
   bool isPlay = false;
-  final ApiManager apiManager = ApiManager();
-  RadioCubit() : super(RadioLoadingState()) {
-    getRadio();
+  final ApiServices apiServices = ApiServices();
+ 
+
+  RadioCubit() : super(RadioLoadingState())
+   {
+  getRadio();
   }
   getRadio() async {
     try {
       emit(RadioLoadingState());
-      var response = await ApiManager.getRadioApi();
-      radio = response?.radios ?? [];
+      var response = await apiServices.getRadio();
+      var date=    RadioResponse.fromJson(response);
+  radio= date.radios??[];
       currentRadio = radio[_currentIndex];
       emit(RadioSuccessState());
     } on Exception catch (e) {
@@ -44,11 +46,11 @@ class RadioCubit extends Cubit<RadioState> {
     currentRadio = radio[_currentIndex];
     emit(RadioSuccessState());
   }
-
   onPlay() {
     if (player.state == PlayerState.playing) {
       isPlay = false;
       player.pause();
+
     } else if (player.state == PlayerState.paused) {
       isPlay = true;
       player.resume();

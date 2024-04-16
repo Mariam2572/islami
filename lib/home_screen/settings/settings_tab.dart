@@ -16,97 +16,103 @@ class SettingsTab extends StatefulWidget {
 class _SettingsTabState extends State<SettingsTab> {
   @override
   Widget build(BuildContext context) {
-    var provider =Provider.of<AppConfigProvider>(context);
-    return Container(
-      margin: EdgeInsets.all(15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(AppLocalizations.of(context)!.language,
-          style: Theme.of(context).textTheme.titleMedium,
-          ),
-          InkWell(
-            onTap: () {
-              showLanguageBottomSheet();
-            },
-            child: Container(
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: MyTheme.primaryLightMode
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    provider.appLanguage == 'en'?
-                    AppLocalizations.of(context)!.english
-                    :
-                    AppLocalizations.of(context)!.arabic
-                    
-                    ,
-                  style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  Icon(Icons.arrow_drop_down,
-                  size: 30,
-                  )
-                ],
-              ),
-            ),
-          )
-       , SizedBox(height: 20,),
-         Text(AppLocalizations.of(context)!.theme,
-          style: Theme.of(context).textTheme.titleMedium,
-          ),
-          InkWell(
-            onTap: () {
-              showThemeBottomSheet();
-            },
-            child: Container(
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: MyTheme.primaryLightMode
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    provider.isDark()?
-                    AppLocalizations.of(context)!.dark
-                    :
-                    AppLocalizations.of(context)!.light
-                    
-                    ,
-                  style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  Icon(Icons.arrow_drop_down,
-                  size: 30,
-                  )
-                ],
-              ),
-            ),
-          )
-       
-        ],
-      ),
-    );
+    var provider = Provider.of<AppConfigProvider>(context);
+
+   return Padding(
+     padding: const EdgeInsets.all(8.0),
+     child: Column(
+       crossAxisAlignment: CrossAxisAlignment.stretch,
+       children: [
+         Text(AppLocalizations.of(context)!.language,
+         style: Theme.of(context).textTheme.titleMedium,
+         ),
+         DropdownButtonFormField(
+         value: provider.appLanguage,
+         items: [
+           DropdownMenuItem(
+             value: 'ar',
+             child: Text(AppLocalizations.of(context)!.arabic),
+           ),
+           DropdownMenuItem(
+             value: 'en',
+             child: Text(AppLocalizations.of(context)!.english),
+           ),
+         ],
+         onChanged: (value) {
+           provider.changeLanguage(value as String);
+           setState(() {});
+         },
+         isExpanded: true,
+         decoration:  InputDecoration(
+           focusedBorder: OutlineInputBorder(
+             borderSide: BorderSide(color: MyTheme.primaryLightMode),
+           ),
+           enabledBorder: OutlineInputBorder(
+             borderSide: BorderSide(color: MyTheme.primaryLightMode),
+           ),
+           border: OutlineInputBorder(
+               borderSide: BorderSide(
+                   style: BorderStyle.solid, color: MyTheme.primaryLightMode)),
+         ),
+         padding: EdgeInsets.only(
+             top: MediaQuery.of(context).size.height * .05,
+             bottom:MediaQuery.of(context).size.height * .05 
+             ),
+         dropdownColor: MyTheme.primaryLightMode,
+         style: Theme.of(context).textTheme.titleSmall,
+         icon:  Icon(
+           Icons.arrow_drop_down,
+           size: 35,
+           color: MyTheme.primaryLightMode,
+         ),
+       ),
+       Text(AppLocalizations.of(context)!.theme,
+         style: Theme.of(context).textTheme.titleMedium,
+         ),
+         DropdownButtonFormField(
+         value: provider.appTheme,
+         items: [
+           DropdownMenuItem(
+             value: ThemeMode.light,
+             child: Text(AppLocalizations.of(context)!.light),
+           ),
+           DropdownMenuItem(
+             value: ThemeMode.dark,
+             child: Text(AppLocalizations.of(context)!.dark),
+           ),
+         ],
+         onChanged: (value) {
+           provider.changeTheme(value as ThemeMode);
+           setState(() {});
+         },
+         isExpanded: true,
+         decoration:  InputDecoration(
+           focusedBorder: OutlineInputBorder(
+             borderSide: BorderSide(color: MyTheme.primaryLightMode),
+           ),
+           enabledBorder: OutlineInputBorder(
+             borderSide: BorderSide(color: MyTheme.primaryLightMode),
+           ),
+           border: OutlineInputBorder(
+               borderSide: BorderSide(
+                   style: BorderStyle.solid, color: MyTheme.primaryLightMode)),
+         ),
+        padding: EdgeInsets.only(
+             top: MediaQuery.of(context).size.height * .05,
+             bottom:MediaQuery.of(context).size.height * .05 
+             ),
+         dropdownColor: MyTheme.primaryLightMode,
+         style: Theme.of(context).textTheme.titleSmall,
+         icon:  Icon(
+           Icons.arrow_drop_down,
+           size: 35,
+           color: MyTheme.primaryLightMode,
+         ),
+       )
+     
+       ],
+     ),
+   );
   }
-  void showLanguageBottomSheet() {
-    showModalBottomSheet(
-    context: context, 
-    builder: (context) {
-      return LanguageBottomSheet();
-    },);
+ 
   }
-  
-  void showThemeBottomSheet() {
-    showModalBottomSheet(context: context,
-     builder: (context) {
-       return ThemeBottomSheet();
-     },
-     );
-  }
-}

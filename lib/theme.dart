@@ -30,7 +30,15 @@ class MyTheme {
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedItemColor: blackColor,
         showUnselectedLabels: true,
+      ),
+       bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: primaryLightMode,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
       ));
+   
+      
     static ThemeData darkMode = ThemeData(
       primaryColor: primaryDarkMode,
       scaffoldBackgroundColor: Colors.transparent,
@@ -56,6 +64,13 @@ class MyTheme {
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedItemColor: yellowColor,
         showUnselectedLabels: true,
+      ),
+      
+       bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: primaryDarkMode,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
       ));
       
 }// 

@@ -17,7 +17,7 @@ class ItemHadethDetails extends StatelessWidget {
     return Text(
      content ,
       textDirection: TextDirection.rtl,
-      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+      style: Theme.of(context).textTheme.titleSmall!.copyWith(
         color: provider.isDark() ? MyTheme.colorWhite :
         MyTheme.blackColor),
     );

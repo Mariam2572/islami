@@ -14,10 +14,10 @@ class ItemSuraDetails extends StatelessWidget {
             var provider =Provider.of<AppConfigProvider>(context);
 
     return Text(
-      '$name {${index+1}}',
+      '$name(${index+1})',
       textDirection: TextDirection.rtl,
       textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+      style: Theme.of(context).textTheme.titleSmall!.copyWith(
         color: provider.isDark() ? MyTheme.colorWhite :
         MyTheme.blackColor
       ),
